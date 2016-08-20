@@ -2,11 +2,11 @@
 You dont know what the fuxk to do 1/2 the time... so here is some things that you can do...
 
 1) add more story to the teleporter... (make the story better) {DONE ADDED A SCRIPT THAT ALLOWS US TO MAKE STORY EASLY}
-2) Add inv and make it to where you can pick up the parts you need to get the tele working. {DONE or @ least it was done not put into users hands but code is there
+2) Add inv and make it to where you can pick up the parts you need to get the tele working. {BP ONLINE tele not so much.
 3) Add a new zone.
 4) Add a new Shop.
 5) Add Combat.
 6) Add more things to add!
 7) Quest add quest to the players gui
-8) Player Gui (ie backpack/quest/skills/ect)
+8) Player Gui (ie backpack/quest/skills/ect) {1/4 done bp is a go.}
 
