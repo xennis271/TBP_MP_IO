@@ -69,14 +69,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\QuestMan.cs" />
+    <Compile Include="Assets\Backpack.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Boot.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Core.cs" />
+    <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Curse_Lock.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Flash.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\LightFlicker.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\NewHpScript.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\NpcChecker.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Picky.cs" />
+    <Compile Include="Assets\Xennis271&apos;s_Script_Pack\QuestMan.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\TalkingNpcScript.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\TypingText.cs" />
   </ItemGroup>

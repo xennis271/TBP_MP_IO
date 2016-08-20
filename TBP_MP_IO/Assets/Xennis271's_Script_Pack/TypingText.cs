@@ -11,6 +11,8 @@ public class TypingText : MonoBehaviour
     public Text TextBox;
     public GameObject TextGo;
     public float Speed;
+    public bool Ui = false;
+    public GameObject Backpack;
 
     // Use this for initialization
     void Start()
@@ -35,6 +37,11 @@ public class TypingText : MonoBehaviour
             yield return new WaitForSeconds(3); // add a little bit of time for the user to read the last text!
             TextBox.text = "";
             
+        }
+        if (Ui)
+        {
+            // turn on all of his ui...
+            Backpack.SetActive(true);
         }
         TextGo.SetActive(false);
     }
