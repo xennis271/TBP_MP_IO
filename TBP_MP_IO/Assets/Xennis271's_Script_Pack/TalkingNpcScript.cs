@@ -27,6 +27,14 @@ public class TalkingNpcScript : MonoBehaviour { // this thing is picky and a bic
     public GameObject QuestionTemp;
     public GameObject CalmTemp;
     public GameObject Player;
+    public GameObject Core;
+    public bool Quest = false;
+    public bool QuestGiven = false;
+    public string NameOfQuest = "";
+    public string DesOfQuest = "";
+    public int AmountOfGold = 0;
+    public bool CanBeDoneOver = false;
+    public bool Done = false;
     bool ran = false;
     /* Fake part 100% NOT in game!
     somthing var? idk questMan
@@ -71,6 +79,12 @@ public class TalkingNpcScript : MonoBehaviour { // this thing is picky and a bic
         But3GO.GetComponent<Button>().onClick.RemoveAllListeners();
         Stage = ExitStage;
         Debug.Log("Exiting stage was set to..." + Stage);
+        if (Quest && QuestGiven != true)
+        {
+            QuestGiven = true;
+            // give the quest...
+            Core.GetComponent<Quest>().MakeQuest(NameOfQuest,DesOfQuest,AmountOfGold,CanBeDoneOver,Done); // Lots of vars there.
+        }
     }
     public void Boot() // grabing all the things that this script needs to be online its a lot
     {
