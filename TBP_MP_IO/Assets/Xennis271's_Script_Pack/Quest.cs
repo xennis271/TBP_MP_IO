@@ -1,22 +1,37 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Quest : MonoBehaviour { // i just do the ui not the real quest.
-    public Dictionary<string, string> QuestLog = new Dictionary<string, string>(); 
+public class Quest : MonoBehaviour { // i handle new quest and old quest not only that but i also handle QuestBook rec.
+    public Dictionary<string, string> QuestLog = new Dictionary<string, string>();
+    [Header("LOCAL ACCESS ONLY!")]
+    public List<string> QuestTitleLog; // LOCAL ACCESS ONLY!
+    public List<string> QuestDetails; // LOCAL ACCESS ONLY!
+    [Header("The Buttons have to be upside down...")]
+    public List<GameObject> QuestButtons;
+    public List<Text> QuestTitleTextBoxesPre;
+    public GameObject QuestDetailsGO;
+    public Text TitleOfQuestDetails;
+    public Text DesOfQuestDetails;
+
     public void MakeFakeQuest()
     {
         MakeQuest("Fake","None",1,true,false); // makes a fake quest...
+        QuestTitleLog.Add("Fake"); // adds Fake Quest to my log.
     }
     public void FinQuest(string NameOfQuest)
     {
         string output = QuestDone(NameOfQuest);
         Debug.Log(output);
+        QuestTitleLog.Remove(NameOfQuest);
     }
 	public void MakeQuest(string NameOfQuest,string DesOfQuest,int GoldGivenFromQuest,bool CanDoOver, bool Done) // lots of data so i can pull from it later!
     {
         // add this to the log...
         QuestLog.Add(NameOfQuest, NameOfQuest+ "#" + DesOfQuest + "#" + GoldGivenFromQuest + "#" + CanDoOver +"#"+Done); // can only be one for right now...
+        QuestTitleLog.Add(NameOfQuest);
+        QuestDetails.Add(DesOfQuest);
     }
     public string QuestDone(string NameOfQuest)
     {
@@ -40,7 +55,7 @@ public class Quest : MonoBehaviour { // i just do the ui not the real quest.
             if (counter == 2) // its the Des of the quest
             {
                 DesOfQuest = Line;
-                //Debug.Log("Saved Des:" + Line);
+                QuestDetails.Remove(DesOfQuest);
             }
             if (counter == 3) // its the amount of gold given...
             {
@@ -83,5 +98,61 @@ public class Quest : MonoBehaviour { // i just do the ui not the real quest.
             }
         }
         return "ERROR!";
+    }
+    public void UpdateQuestBook() // i update the UI upon req
+    {
+        // how many slots do i have? 2 (for now. no limit script is put into place but you cant get more...)
+        int slots = QuestTitleTextBoxesPre.Count;
+        // how many slots do i need?
+        //int UsedSlots = QuestLog.Count;
+        int counterEx = 1;
+        int ButtonsOff = 0;
+        foreach (GameObject Button in QuestButtons)
+        {
+            ButtonsOff++;
+            Button.SetActive(false); // we will reactvate soon!
+        }
+        Debug.Log("Buttons Turned Off:" + ButtonsOff);
+        Debug.Log("CounterEx:" + counterEx + "QuestLog.Count" + QuestLog.Count);
+        while (counterEx <= QuestLog.Count)
+        {
+            QuestButtons[counterEx].SetActive(true);
+            counterEx++;
+        }
+        // we need all quest that we have soo we look to the list for names
+        int counter = 0;
+        int helped = 0;
+        foreach (string Quest in QuestTitleLog)
+        {
+            while(counter != slots-1) // to account for 0.
+            {
+                var box = QuestTitleTextBoxesPre[counter];
+                counter++;
+                box.text = Quest;
+                helped++;
+            }
+            
+                // we have some boxes that are not empty
+                foreach (Text Box in QuestTitleTextBoxesPre)
+                {
+                    if (Box.text == "Loading") // this has no data.
+                    {
+                        Box.text = "No Quest.";
+                    }
+                }
+            
+        }
+    }
+    public void ButtonOneClicked() // quest one was clicked...
+    {
+        QuestDetailsGO.SetActive(true);
+        DesOfQuestDetails.text = QuestDetails[1]; // one is the button.
+        TitleOfQuestDetails.text = QuestTitleLog[1]; // one is the button.
+    }
+    public void ButtonTwoClicked() // quest one was clicked...
+    {
+        QuestDetailsGO.SetActive(true);
+        DesOfQuestDetails.text = QuestDetails[2]; // one is the button.
+        TitleOfQuestDetails.text = QuestTitleLog[2]; // one is the button.
     }
 }

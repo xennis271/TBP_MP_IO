@@ -69,7 +69,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Quest.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Backpack.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Boot.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Core.cs" />
@@ -79,6 +78,7 @@
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\NewHpScript.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\NpcChecker.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Picky.cs" />
+    <Compile Include="Assets\Xennis271&apos;s_Script_Pack\Quest.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\QuestMan.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\TalkingNpcScript.cs" />
     <Compile Include="Assets\Xennis271&apos;s_Script_Pack\TypingText.cs" />

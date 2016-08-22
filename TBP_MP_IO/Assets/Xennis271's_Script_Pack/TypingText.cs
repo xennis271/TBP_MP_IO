@@ -13,6 +13,7 @@ public class TypingText : MonoBehaviour
     public float Speed;
     public bool Ui = false;
     public GameObject Backpack;
+    public GameObject QuestUI;
 
     // Use this for initialization
     void Start()
@@ -42,6 +43,7 @@ public class TypingText : MonoBehaviour
         {
             // turn on all of his ui...
             Backpack.SetActive(true);
+            QuestUI.SetActive(true);
         }
         TextGo.SetActive(false);
     }

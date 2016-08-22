@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-public class Boot : MonoBehaviour {
+public class Boot : MonoBehaviour { // man this is old cool code but still old.
     public void Wait(int Time)
     {
         System.Threading.Thread.Sleep(Time * 1000);
@@ -314,6 +314,9 @@ public class Boot : MonoBehaviour {
         MessageTemplateNews.SetActive(false);
         QuestionTemplate.SetActive(false);
         Core.SendMessage("StartGameEscaped");
+        // we also need to give a quest...
+        var Quest = GameObject.Find("_Core").GetComponent<Quest>();
+        Quest.MakeQuest("Fix Teleporter","Go around the room and pick up the parts.",1,false,false); // ALL OF THE DATA!
     }
     public void Join()
     {
@@ -332,5 +335,8 @@ public class Boot : MonoBehaviour {
         MessageTemplateNews.SetActive(false);
         QuestionTemplate.SetActive(false);
         Core.SendMessage("StartGameJoined");
+        // we also need to give a quest...
+        var Quest = GameObject.Find("_Core").GetComponent<Quest>();
+        Quest.MakeQuest("Fix Teleporter", "Go around the room and pick up the parts.", 1, false, false); // ALL OF THE DATA!
     }
 }
