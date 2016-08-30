@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +29,8 @@ public class TalkingNpcScript : MonoBehaviour { // this thing is picky and a bic
     public GameObject Player;
     public GameObject Core;
     public bool Quest = false;
+    public string CheckIfThisQuestIsDone;
+    public int IDofAction;
     public bool QuestGiven = false;
     public string NameOfQuest = "";
     public string DesOfQuest = "";
@@ -84,6 +86,15 @@ public class TalkingNpcScript : MonoBehaviour { // this thing is picky and a bic
             QuestGiven = true;
             // give the quest...
             Core.GetComponent<Quest>().MakeQuest(NameOfQuest,DesOfQuest,AmountOfGold,CanBeDoneOver,Done); // Lots of vars there.
+        }
+        if (Core.GetComponent<Quest>().DoneQuest.Contains(CheckIfThisQuestIsDone))
+        {
+            // we need to do somthing...
+            if (IDofAction == 1) // kill the player....
+            {
+                Player.SetActive(false); // makes the player stay?
+                SceneManager.LoadScene(1);
+            }
         }
     }
     public void Boot() // grabing all the things that this script needs to be online its a lot

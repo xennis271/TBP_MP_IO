@@ -14,10 +14,13 @@ public class TypingText : MonoBehaviour
     public bool Ui = false;
     public GameObject Backpack;
     public GameObject QuestUI;
+    public GameObject QuestBar;
+    public GameObject Movement;
 
     // Use this for initialization
     void Start()
     {
+        Movement.SetActive(false);
         TextBox.text = "";
         StartCoroutine("AutoType");
     }
@@ -44,7 +47,9 @@ public class TypingText : MonoBehaviour
             // turn on all of his ui...
             Backpack.SetActive(true);
             QuestUI.SetActive(true);
+            QuestBar.SetActive(true);
         }
         TextGo.SetActive(false);
+        Movement.SetActive(false);
     }
 }

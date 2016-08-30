@@ -14,7 +14,19 @@ public class Quest : MonoBehaviour { // i handle new quest and old quest not onl
     public GameObject QuestDetailsGO;
     public Text TitleOfQuestDetails;
     public Text DesOfQuestDetails;
+    [Header("This is for the quest gui bar (its ok if its offline!)")]
+    public Text TitleOfBar;
+    public Slider ProgressOnBar;
+    [Header("This is a ever changing var dont call it for a list..")]
+    public string CurentQuest;
+    public bool OnQuest = false; // asumed
+    public GameObject CurentButt;
+    [Header("The most called thing...")]
+    public List<string> DoneQuest; // this is all the quest that the player has done...
 
+
+
+    // Method calls!
     public void MakeFakeQuest()
     {
         MakeQuest("Fake","None",1,true,false); // makes a fake quest...
@@ -25,6 +37,7 @@ public class Quest : MonoBehaviour { // i handle new quest and old quest not onl
         string output = QuestDone(NameOfQuest);
         Debug.Log(output);
         QuestTitleLog.Remove(NameOfQuest);
+        DoneQuest.Add(NameOfQuest);
     }
 	public void MakeQuest(string NameOfQuest,string DesOfQuest,int GoldGivenFromQuest,bool CanDoOver, bool Done) // lots of data so i can pull from it later!
     {
@@ -32,6 +45,12 @@ public class Quest : MonoBehaviour { // i handle new quest and old quest not onl
         QuestLog.Add(NameOfQuest, NameOfQuest+ "#" + DesOfQuest + "#" + GoldGivenFromQuest + "#" + CanDoOver +"#"+Done); // can only be one for right now...
         QuestTitleLog.Add(NameOfQuest);
         QuestDetails.Add(DesOfQuest);
+        OnQuest = true;
+        CurentQuest = NameOfQuest; // now we have the name set...
+        //Debug.Log("Debug:" + CurentQuest);
+        TitleOfBar.text = NameOfQuest;
+        ProgressOnBar.value = 0; // sets the progress to 0
+        CurentButt.SetActive(false);
     }
     public string QuestDone(string NameOfQuest)
     {
@@ -122,11 +141,12 @@ public class Quest : MonoBehaviour { // i handle new quest and old quest not onl
         // we need all quest that we have soo we look to the list for names
         int counter = 0;
         int helped = 0;
+        // ok we need to re think this right now we are looking for every quest...
         foreach (string Quest in QuestTitleLog)
         {
             while(counter != slots-1) // to account for 0.
             {
-                var box = QuestTitleTextBoxesPre[counter];
+                var box = QuestTitleTextBoxesPre[counter]; // BUT THESE ARE BOXS! WHY ARE WE DOING THIS IN A QUEST LOOP?
                 counter++;
                 box.text = Quest;
                 helped++;
@@ -146,13 +166,54 @@ public class Quest : MonoBehaviour { // i handle new quest and old quest not onl
     public void ButtonOneClicked() // quest one was clicked...
     {
         QuestDetailsGO.SetActive(true);
-        DesOfQuestDetails.text = QuestDetails[1]; // one is the button.
-        TitleOfQuestDetails.text = QuestTitleLog[1]; // one is the button.
+        DesOfQuestDetails.text = QuestDetails[0]; // one is the button.
+        TitleOfQuestDetails.text = QuestTitleLog[0]; // one is the button.
     }
     public void ButtonTwoClicked() // quest one was clicked...
     {
         QuestDetailsGO.SetActive(true);
-        DesOfQuestDetails.text = QuestDetails[2]; // one is the button.
-        TitleOfQuestDetails.text = QuestTitleLog[2]; // one is the button.
+        DesOfQuestDetails.text = QuestDetails[1]; // one is the button.
+        TitleOfQuestDetails.text = QuestTitleLog[1]; // one is the button.
+    }
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    // at this point we have all the buttons working all but geting it to set the current task... SO
+    // to do this we need to pull data from that box... we can get the title of the quest and thats all we realy need that and...
+    // we need to add somthing that alows things to edit the bar with out editing the gui quest bar ie if i kill somthing
+    // that somthing needs to send me a message NOT send a message to the gui bar! (becuse that bar dies somtimes...)
+    public void SetCurrentQuest() // we dont need to know who asked we just check to see if we have data...
+    {
+        if (OnQuest == false)
+        {
+            OnQuest = true;
+            CurentQuest = TitleOfQuestDetails.text; // now we have the name set...
+            //Debug.Log("Debug:" + CurentQuest);
+            TitleOfBar.text = CurentQuest;
+            ProgressOnBar.value = 0; // sets the progress to 0
+        }else
+        {
+            Debug.Log("You have a quest!");
+        }
+    }
+    public void AddOneToQuest()
+    {
+        ProgressOnBar.value += 1; // adds
+    }
+    public void SubOneToQuest()
+    {
+        ProgressOnBar.value += 1; // adds
+    }
+    public void Update() // check the quest...
+    {
+        if (OnQuest)
+        {
+            if (ProgressOnBar.value >= ProgressOnBar.maxValue)
+            {
+                ProgressOnBar.value = ProgressOnBar.maxValue;
+                TitleOfBar.text = "Woo you have compleated Your Quest!";
+                CurentButt.SetActive(true);
+                OnQuest = false;
+                FinQuest(CurentQuest);
+            }
+        }
     }
 }
