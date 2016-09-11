@@ -17,6 +17,7 @@ public class Core : MonoBehaviour {
     public GameObject Player;
     public GameObject Tot;
     public GameObject UI;
+    public GameObject Bar;
 
     public void GetDataNameOfPlayer(string NameOfPlayerOld)
     {
@@ -49,11 +50,12 @@ public class Core : MonoBehaviour {
     public void StartGameEscaped()
     {
         // LINK START!
-        Debug.Log("This is as far as i have programed!");
+        //Debug.Log("This is as far as i have programed!");
         OldCam.SetActive(false);
         Player.SetActive(true);
         UI.SetActive(true);
         Tot.SetActive(true);
+        Bar.SetActive(true);
     }
     public void StartGameJoined()
     {
@@ -62,7 +64,8 @@ public class Core : MonoBehaviour {
         Player.SetActive(true);
         UI.SetActive(true);
         Tot.SetActive(true);
-        Debug.Log("This is as far as i have programed!");
+        Bar.SetActive(true);
+        //Debug.Log("This is as far as i have programed!");
     }
     public void AddToBackPack(string thing)
     {
